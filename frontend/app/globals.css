@@ -1,0 +1,185 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Dark mode by default - Matrix/Cyberpunk Aesthetic (RED) */
+:root {
+  --background: oklch(0.1 0 0); /* Pure dark / near black */
+  --foreground: oklch(0.6 0.25 25); /* Bright Red */
+  --card: oklch(0.12 0 0);
+  --card-foreground: oklch(0.6 0.25 25);
+  --popover: oklch(0.12 0 0);
+  --popover-foreground: oklch(0.6 0.25 25);
+  --primary: oklch(0.6 0.25 25); /* Bright Red */
+  --primary-foreground: oklch(0.1 0 0);
+  --secondary: oklch(0.15 0.05 25); /* Dark Red */
+  --secondary-foreground: oklch(0.6 0.25 25);
+  --muted: oklch(0.15 0.02 25);
+  --muted-foreground: oklch(0.4 0.1 25); /* Faded Red */
+  --accent: oklch(0.2 0.08 25);
+  --accent-foreground: oklch(0.7 0.2 25);
+  --destructive: oklch(0.6 0.25 25); /* Alarm Red */
+  --destructive-foreground: oklch(0.1 0 0);
+  --border: oklch(0.25 0.1 25);
+  --input: oklch(0.2 0.05 25);
+  --ring: oklch(0.6 0.25 25);
+  --chart-1: oklch(0.6 0.25 25); /* Bright Red */
+  --chart-2: oklch(0.5 0.2 140); /* Neon Green for "OK" status */
+  --chart-3: oklch(0.75 0.15 280); /* Cyber Purple */
+  --chart-4: oklch(0.8 0.12 85); /* Alert Yellow */
+  --chart-5: oklch(0.65 0.18 200); /* Cyans */
+  --radius: 0px; /* Sharp edges */
+  --sidebar: oklch(0.1 0 0);
+  --sidebar-foreground: oklch(0.6 0.25 25);
+  --sidebar-primary: oklch(0.6 0.25 25);
+  --sidebar-primary-foreground: oklch(0.1 0 0);
+  --sidebar-accent: oklch(0.15 0.05 25);
+  --sidebar-accent-foreground: oklch(0.6 0.25 25);
+  --sidebar-border: oklch(0.25 0.1 25);
+  --sidebar-ring: oklch(0.6 0.25 25);
+}
+
+@theme inline {
+  --font-sans: 'Courier New', 'Geist Mono', monospace; /* Force monospace everywhere */
+  --font-mono: 'Courier New', 'Geist Mono', monospace;
+  --radius: 0px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: var(--radius);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* --- Keyframes for Cyber Theme --- */
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes glitch-anim {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+
+.glitch-hover:hover {
+  animation: glitch-anim 0.2s infinite;
+}
+
+@keyframes border-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 5px rgba(255, 0, 0, 0.3),
+      0 0 10px rgba(255, 0, 0, 0.15),
+      inset 0 0 5px rgba(255, 0, 0, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 10px rgba(255, 0, 0, 0.5),
+      0 0 20px rgba(255, 0, 0, 0.25),
+      inset 0 0 10px rgba(255, 0, 0, 0.1);
+  }
+}
+
+.animate-border-glow {
+  animation: border-glow 2s ease-in-out infinite;
+}
+
+/* --- Scroll Reveal --- */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(4px);
+  transition:
+    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* --- Micro-interactions --- */
+
+.micro-hover {
+  transition: all 150ms ease-out;
+  will-change: transform;
+}
+
+.micro-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+  border-color: rgba(255, 0, 0, 0.8);
+}
+
+.micro-hover:active {
+  transform: scale(0.98);
+  transition-duration: 50ms;
+}
+
+/* --- Reduced motion --- */
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  .animate-border-glow {
+    animation: none;
+  }
+  .micro-hover:hover {
+    transform: none;
+  }
+}
